@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/logo-remove2.png";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -9,14 +11,21 @@ function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="logo">
-        <span>💬</span>
-        <h2>OurChat.UI</h2>
+        <img
+          src={logo}
+          alt="OurChat"
+          className="navbar-logo"
+        />
+        <p id="nav-logo-text">OurChat.UI</p>
       </div>
 
       <ul className="nav-links">
@@ -24,7 +33,9 @@ function Navbar() {
         <li>About</li>
       </ul>
 
-      <button className="nav-btn">Get Started</button>
+      <Link to="/app" className="nav-btn">
+        Open App
+      </Link>
     </nav>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import logo from "../assets/logo-remove2.png";
 
 function Hero() {
   const conversation = [
@@ -25,6 +26,11 @@ function Hero() {
 
   return (
     <section className="hero">
+      <img
+        src={logo}
+        alt=""
+        className="hero-bg-logo"
+      />
       <div className="hero-content">
         <h1>
           Conversations,<br />

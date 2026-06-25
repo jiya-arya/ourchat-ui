@@ -1,27 +1,30 @@
-import './App.css';
+import "./App.css";
 
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Features />
-      <Footer />
-    </>
+    <BrowserRouter>
+
+      <Routes>
+
+        <Route
+          path="/"
+          element={<LandingPage />}
+        />
+
+        <Route
+          path="/app"
+          element={<ChatPage />}
+        />
+
+      </Routes>
+
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-// import MessagingApp from "./components/MessagingApp";
-
-// function App() {
-//   return <MessagingApp />;
-// }
-
-// export default App;

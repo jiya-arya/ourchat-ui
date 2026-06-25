@@ -1,4 +1,11 @@
+import { useState } from "react";
+import logo from "../assets/logo-remove2.png";
+
+
 function MessagingApp() {
+
+  const [activeChat, setActiveChat] = useState(null);
+
   return (
     <div className="messaging-app">
 
@@ -6,12 +13,28 @@ function MessagingApp() {
       <div className="sidebar">
 
         <div className="sidebar-header">
-          💬 OurChats
+          <img
+            src={logo}
+            alt="OurChat"
+            className="sidebar-logo-img"
+          />
+          <p>OurChat.UI</p>
         </div>
 
-        {/* empty state */}
-        <div className="sidebar-empty">
-          No chats yet
+        <div
+          className={`chat-item ${activeChat === "assistant" ? "active" : ""
+            }`}
+          onClick={() => setActiveChat("assistant")}
+        >
+          🤖 AI Assistant
+        </div>
+
+        <div className="chat-item disabled">
+          💬 Sarah
+        </div>
+
+        <div className="chat-item disabled">
+          👥 Team Alpha
         </div>
 
       </div>
@@ -19,27 +42,68 @@ function MessagingApp() {
       {/* CHAT AREA */}
       <div className="chat-area">
 
-        <div className="chat-header">
-          Select a chat
-        </div>
+        {!activeChat ? (
 
-        {/* empty messages state */}
-        <div className="messages empty-state">
-          <p>Start a conversation</p>
-        </div>
+          <>
+            <div className="chat-header">
+              Workspace
+            </div>
 
-        {/* input still present but inactive */}
-        <div className="input-box">
+            <div className="messages empty-state">
 
-          <input
-            type="text"
-            placeholder="Type a message..."
-            disabled
-          />
+              <div className="empty-card">
 
-          <button disabled>Send</button>
+                <h2>Welcome to OurChat</h2>
 
-        </div>
+                <p>
+                  Select a conversation from the sidebar
+                  to start messaging.
+                </p>
+
+              </div>
+
+            </div>
+          </>
+
+        ) : (
+
+          <>
+            <div className="chat-header">
+              🤖 AI Assistant
+            </div>
+
+            <div className="messages">
+
+              <div className="msg ai">
+                Hello 👋 I am your AI assistant.
+              </div>
+
+              <div className="msg user">
+                What is React?
+              </div>
+
+              <div className="msg ai">
+                React is a JavaScript library for building user interfaces.
+              </div>
+
+            </div>
+
+            <div className="input-box">
+
+              <input
+                type="text"
+                placeholder="Type a message..."
+                disabled
+              />
+
+              <button disabled>
+                Send
+              </button>
+
+            </div>
+
+          </>
+        )}
 
       </div>
 
