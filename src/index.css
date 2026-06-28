@@ -1,131 +1,120 @@
-/* =========================
-   OURCHAT.UI — BASE SYSTEM
-   Clean Production Foundation
-========================= */
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
-/* ========== RESET ========== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Reset */
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* remove default transitions from base layer */
-* {
-  transition: none;
+/* Root */
+:root{
+    --bg:#07090F;
+    --bg-secondary:#0D111A;
+    --surface:#111827;
+    --surface-light:#171F2E;
+
+    --primary:#6D7CFF;
+    --primary-dark:#5566F5;
+    --secondary:#8B5CF6;
+    --cyan:#36CFFF;
+
+    --white:#FFFFFF;
+    --text:#E7EAF3;
+    --muted:#9CA7B8;
+
+    --glass:rgba(255,255,255,.05);
+    --glass-2:rgba(255,255,255,.08);
+
+    --border:rgba(255,255,255,.08);
+
+    --shadow-lg:0 25px 80px rgba(0,0,0,.45);
+    --shadow-md:0 15px 45px rgba(0,0,0,.35);
+
+    --radius-sm:10px;
+    --radius-md:16px;
+    --radius-lg:24px;
+    --radius-xl:32px;
 }
 
-html, body {
-  height: 100%;
-  scroll-behavior: smooth;
+/* HTML */
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-  font-family: Inter, system-ui, -apple-system, Arial, sans-serif;
+/* Body */
+body{
+    font-family:"Inter",sans-serif;
+    background:
+        radial-gradient(circle at top left,#16203d 0%,transparent 35%),
+        radial-gradient(circle at bottom right,#25194b 0%,transparent 35%),
+        linear-gradient(180deg,#07090F,#090B12);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+}
+/* ---------- BACKGROUND GLOWS ---------- */
+body::before{content:"";position:fixed;width:600px;height:600px;background:#5D6CFF;opacity:.15;filter:blur(180px);top:-250px;left:-200px;pointer-events:none;z-index:-2;}
+body::after{content:"";position:fixed;width:500px;height:500px;background:#8B5CF6;opacity:.12;filter:blur(180px);bottom:-250px;right:-200px;pointer-events:none;z-index:-2;}
 
-  background: radial-gradient(
-    circle at top,
-    #111827 0%,
-    #0b0f17 55%,
-    #070a12 100%
-  );
+/* ---------- TYPOGRAPHY ---------- */
+h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-2px;}
+h2{font-size:clamp(2.3rem,4vw,3.5rem);font-weight:700;line-height:1.1;}
+h3{font-size:1.3rem;font-weight:600;}
+p{font-size:1.05rem;color:var(--muted);line-height:1.8;}
+/* Links */
+a{text-decoration:none;color:inherit;}
 
-  color: #e5e7eb;
+/* Button */
+button{font-family:inherit;border:none;outline:none;cursor:pointer;}
 
-  overflow-x: hidden;
+/* Input */
+input{font-family:inherit;outline:none;}
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* List */
+ul{list-style:none;}
+
+/* Image */
+img{display:block;max-width:100%;}
+
+/* Sections */
+section{width:min(1280px,92%);margin:auto;}
+
+/* Container */
+.container{width:min(1280px,92%);margin:auto;}
+
+/* Glass */
+.glass{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:#090B12;}
+::-webkit-scrollbar-thumb{background:#313C58;border-radius:100px;}
+::-webkit-scrollbar-thumb:hover{background:#5265F5;}
+/* Text Selection */
+::selection{background:#6D7CFF;color:white;}
+
+/* Animation */
+@keyframes float{0%{transform:translateY(0px);}50%{transform:translateY(-10px);}100%{transform:translateY(0px);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{50%{transform:scale(1.1);}}
+@keyframes glow{50%{box-shadow:0 0 35px rgba(109,124,255,.5);}}
+
+/* Responsive */
+@media(max-width:992px){section{width:94%;}}
+
+@media(max-width:768px){
+h1{font-size:3rem;letter-spacing:-2px;}
+h2{font-size:2.1rem;}
+p{font-size:.98rem;}
 }
 
-/* ========== DESIGN TOKENS ========== */
-:root {
-  --bg: #0b0f17;
-  --bg-soft: #111827;
-
-  --text: rgba(229, 231, 235, 0.92);
-  --muted: rgba(156, 163, 175, 0.75);
-
-  --primary: #6d7cff;
-  --primary-soft: rgba(109, 124, 255, 0.15);
-
-  --glass: rgba(255, 255, 255, 0.04);
-  --border: rgba(255, 255, 255, 0.08);
-
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
-}
-
-/* ========== GLOBAL ELEMENTS ========== */
-button {
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* ========== TYPOGRAPHY BASE ========== */
-h1, h2, h3 {
-  letter-spacing: -0.6px;
-  font-weight: 600;
-}
-
-p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-/* selection */
-::selection {
-  background: rgba(109, 124, 255, 0.25);
-  color: #fff;
-}
-
-/* ========== SECTION SYSTEM ========== */
-section {
-  padding: 100px 80px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* hero override spacing */
-.hero {
-  padding: 100px 80px;
-}
-
-/* features wrapper alignment */
-.features-wrapper {
-  padding: 100px 80px;
-}
-
-/* ========== RESPONSIVE BASE ========== */
-@media (max-width: 900px) {
-  section {
-    padding: 60px 20px;
-  }
-
-  .hero {
-    padding: 60px 20px;
-  }
-
-  .features-wrapper {
-    padding: 60px 20px;
-  }
+@media(max-width:480px){
+h1{font-size:2rem;}
+h2{font-size:1.8rem;}
 }

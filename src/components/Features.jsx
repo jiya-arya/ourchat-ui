@@ -1,84 +1,66 @@
 function Features() {
-  return (
-    <section className="features-wrapper">
+  const features = [
+    {
+      title: "Unified Messaging",
+      description:
+        "Switch seamlessly between personal conversations, team discussions and AI interactions inside one workspace.",
+      number: "01",
+    },
+    {
+      title: "AI Assistant",
+      description:
+        "Generate ideas, summarize conversations and receive intelligent responses without leaving the chat.",
+      number: "02",
+    },
+    {
+      title: "Modern Workspace",
+      description:
+        "Designed using React with reusable components, scalable architecture and responsive layouts.",
+      number: "03",
+    },
+    {
+      title: "Beautiful Interface",
+      description:
+        "Minimal design, smooth interactions and premium visual language inspired by modern SaaS products.",
+      number: "04",
+    },
+  ];
 
-      <div className="features-heading">
-        <h2>Why OurChat.UI?</h2>
+  return (
+    <section className="features-wrapper" id="features">
+      <div className="section-title">
+        <span>FEATURES</span>
+
+        <h2>
+          Everything you need
+          <br />
+          in one intelligent workspace.
+        </h2>
 
         <p>
-          Everything you need for human and AI conversations
-          in a single modern workspace.
+          Designed for productivity, collaboration and AI-assisted
+          communication.
         </p>
       </div>
 
-      <div className="features">
+      <div className="feature-grid">
+        {features.map((feature) => (
+          <div
+            key={feature.number}
+            className="feature-box"
+          >
+            <div className="feature-number">
+              {feature.number}
+            </div>
 
-        {/* FEATURE 1 */}
-        <div className="feature-card large">
-          <div className="icon">💬</div>
+            <h3>{feature.title}</h3>
 
-          <h3>Unified Conversations</h3>
+            <p>{feature.description}</p>
 
-          <p>
-            Manage personal chats and AI interactions within a single interface.
-          </p>
-
-          <span className="subtext">
-            No switching apps — everything in one workspace.
-          </span>
-
-          <div className="tag">Core Feature</div>
-        </div>
-
-        {/* FEATURE 2 */}
-        <div className="feature-card">
-          <div className="icon">🤖</div>
-
-          <h3>AI Assistant</h3>
-
-          <p>
-            Get instant help through a dedicated AI chat.
-          </p>
-
-          <span className="subtext">
-            Smart responses with contextual understanding.
-          </span>
-        </div>
-
-        {/* FEATURE 3 */}
-        <div className="feature-card">
-          <div className="icon">📱</div>
-
-          <h3>Responsive Design</h3>
-
-          <p>
-            Optimized for desktop, tablet and mobile.
-          </p>
-
-          <span className="subtext">
-            Seamless experience across all screen sizes.
-          </span>
-        </div>
-
-        {/* FEATURE 4 */}
-        <div className="feature-card wide">
-          <div className="icon">⚛️</div>
-
-          <h3>Built with React</h3>
-
-          <p>
-            Developed using reusable React components and modern frontend practices.
-          </p>
-
-          <span className="subtext">
-            Clean architecture designed for scalability and future expansion.
-          </span>
-
-          <div className="tag">Frontend Stack</div>
-        </div>
-
+            <button>Learn More →</button>
+          </div>
+        ))}
       </div>
-
     </section>
   );
 }

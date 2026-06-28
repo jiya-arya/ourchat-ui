@@ -1,112 +1,197 @@
 import { useState } from "react";
 import logo from "../assets/logo-remove2.png";
 
-
 function MessagingApp() {
+  const chats = [
+    {
+      id: 1,
+      name: "AI Assistant",
+      icon: "🤖",
+      online: true,
+      last: "Ready to help.",
+      unread: 2,
+    },
+    {
+      id: 2,
+      name: "Mahak",
+      icon: "👩",
+      online: true,
+      last: "Let's meet tomorrow.",
+      unread: 0,
+    },
+    {
+      id: 3,
+      name: "Team OurChat-UI",
+      icon: "👥",
+      online: false,
+      last: "Project updated.",
+      unread: 4,
+    },
+    {
+      id: 4,
+      name: "Design Team",
+      icon: "🎨",
+      online: true,
+      last: "New mockups ready.",
+      unread: 0,
+    },
+  ];
 
   const [activeChat, setActiveChat] = useState(null);
 
   return (
     <div className="messaging-app">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="sidebar-top">
+          <div className="sidebar-header">
+            <img
+              src={logo}
+              alt="OurChat"
+              className="sidebar-logo-img"
+            />
 
-      {/* SIDEBAR */}
-      <div className="sidebar">
+            <div>
+              <h3>OurChat.UI</h3>
+              <span>Workspace</span>
+            </div>
+          </div>
 
-        <div className="sidebar-header">
-          <img
-            src={logo}
-            alt="OurChat"
-            className="sidebar-logo-img"
-          />
-          <p>OurChat.UI</p>
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search conversations..."
+            />
+          </div>
         </div>
 
-        <div
-          className={`chat-item ${activeChat === "assistant" ? "active" : ""
-            }`}
-          onClick={() => setActiveChat("assistant")}
-        >
-          🤖 AI Assistant
+        <div className="chat-list">
+          {chats.map((chat) => (
+            <div
+              key={chat.id}
+              className={`chat-item ${
+                activeChat?.id === chat.id ? "active" : ""
+              }`}
+              onClick={() => setActiveChat(chat)}
+            >
+              <div className="chat-avatar">
+                {chat.icon}
+                {chat.online && (
+                  <span className="online-dot"></span>
+                )}
+              </div>
+
+              <div className="chat-info">
+                <h4>{chat.name}</h4>
+                <p>{chat.last}</p>
+              </div>
+
+              {chat.unread > 0 && (
+                <span className="unread-badge">
+                  {chat.unread}
+                </span>
+              )}
+            </div>
+          ))}
         </div>
+      </aside>
 
-        <div className="chat-item disabled">
-          💬 Sarah
-        </div>
-
-        <div className="chat-item disabled">
-          👥 Team Alpha
-        </div>
-
-      </div>
-
-      {/* CHAT AREA */}
-      <div className="chat-area">
-
+      {/* Chat Area */}
+      <section className="chat-area">
         {!activeChat ? (
+          <div className="welcome-screen">
+            <img
+              src={logo}
+              alt="OurChat"
+              className="welcome-logo"
+            />
 
-          <>
-            <div className="chat-header">
-              Workspace
+            <span className="welcome-tag">
+              AI WORKSPACE
+            </span>
+
+            <h1>
+              Welcome to
+              <br />
+              OurChat.UI
+            </h1>
+
+            <p>
+              One workspace for your conversations,
+              collaboration and AI assistance.
+              Select a conversation from the sidebar
+              to get started.
+            </p>
+
+            <div className="welcome-actions">
+              <button
+                className="welcome-primary"
+                onClick={() => setActiveChat(chats[0])}
+              >
+                🤖 Open AI Assistant
+              </button>
+
+              <button className="welcome-secondary">
+                + New Conversation
+              </button>
             </div>
-
-            <div className="messages empty-state">
-
-              <div className="empty-card">
-
-                <h2>Welcome to OurChat</h2>
-
-                <p>
-                  Select a conversation from the sidebar
-                  to start messaging.
-                </p>
-
-              </div>
-
-            </div>
-          </>
-
+          </div>
         ) : (
-
           <>
-            <div className="chat-header">
-              🤖 AI Assistant
-            </div>
+            <header className="chat-header">
+              <div className="chat-user">
+                <div className="chat-avatar large">
+                  {activeChat.icon}
+                </div>
 
-            <div className="messages">
+                <div>
+                  <h3>{activeChat.name}</h3>
 
-              <div className="msg ai">
-                Hello 👋 I am your AI assistant.
+                  <span>
+                    {activeChat.online
+                      ? "Online"
+                      : "Offline"}
+                  </span>
+                </div>
               </div>
 
-              <div className="msg user">
-                What is React?
+              <div className="header-actions">
+                <button>📞</button>
+                <button>🎥</button>
+                <button>⋮</button>
               </div>
+            </header>
 
-              <div className="msg ai">
-                React is a JavaScript library for building user interfaces.
-              </div>
-
+            <div
+              style={{
+                flex: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "#7F8A9E",
+              }}
+            >
+              Conversation will appear here.
             </div>
 
             <div className="input-box">
+              <button>😊</button>
+              <button>📎</button>
 
               <input
                 type="text"
-                placeholder="Type a message..."
-                disabled
+                placeholder={`Message ${activeChat.name}...`}
               />
 
-              <button disabled>
-                Send
+              <button>🎤</button>
+
+              <button className="send-btn">
+                ➜
               </button>
-
             </div>
-
           </>
         )}
-
-      </div>
-
+      </section>
     </div>
   );
 }

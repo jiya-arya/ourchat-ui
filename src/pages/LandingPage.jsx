@@ -5,12 +5,12 @@ import Footer from "../components/Footer";
 
 function LandingPage() {
   return (
-    <>
+    <main className="landing-page">
       <Navbar />
       <Hero />
       <Features />
       <Footer />
-    </>
+    </main>
   );
 }
 
